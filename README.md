@@ -18,7 +18,7 @@ Windows System Architecture? User Mode? Kernel Mode?
 ### Get Questions-And-Answers
 
 ```shell
-Give me list of 50 essential questions and answers related to topic1, topic2, and topic3 formatted in Markdown.
+Give me list of 50 essential questions and answers related to topic1, topic2, and topic3  in Markdown language.
 ```
 
 ---
