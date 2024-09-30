@@ -191,6 +191,10 @@ IDI_ICON1 ICON "C:\Users\MalDev\Desktop\Google_Chrome_icon (1).ico" //Reference
 - **Resource Hacker**: This tool allows you to view and edit the embedded resources in executables.
 - **File Properties**: Right-click the binary, select **Properties**, and check the **Details** tab to confirm the metadata is in place.
 
+# Result 2:
+
+![ml21](https://github.com/user-attachments/assets/adf19979-08f4-4818-906b-a7d6aa2264f2)
+![ml22](https://github.com/user-attachments/assets/743845eb-5d78-45b8-ae31-42b35874443b)
 ## Summary
 This process enables you to embed metadata and icons into a binary, which can help make it appear legitimate. For professionals in cybersecurity, this type of metadata modification is essential to understand as it’s often used in malware to disguise files as legitimate software.
 
