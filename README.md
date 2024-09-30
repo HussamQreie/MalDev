@@ -117,9 +117,15 @@ This metadata simulates a legitimate program like Google Chrome.
 - Compile the project by going to **Build** > **Build Solution**.
 - You can inspect the compiled binary using a tool like **Resource Hacker** to see if the metadata has been embedded correctly.
 
+# Result 1:
+![executable-file-without-img](https://github.com/user-attachments/assets/a8bd9ccc-174c-4ca9-a67b-8f5c7fe8f681)
+
+![ml](https://github.com/user-attachments/assets/6d069d2d-d5ba-4cda-8f7b-59a068195d20)
+
 ### 7. Add an Icon to Make It Look Legitimate
 - Download an appropriate icon in `.ico` format that you'd like to assign to the binary.
 - Place the `.ico` file inside your project directory.
+- How? drag and drop .ico file into **Resource Files**
 
 ### 8. Modify the Resource File to Include the Icon
 - Open the resource file (`metadata.rc`) again in **Source Code (Text) Editor**.
@@ -128,7 +134,12 @@ This metadata simulates a legitimate program like Google Chrome.
 ```c
 IDI_ICON1 ICON "youricon.ico"
 ```
+Make sure: 
 
+- The line IDI_ICON1 ICON "youricon.ico" is added right after the BEGIN statement and before the BLOCK "StringFileInfo" block.
+- Ensure that "youricon.ico" is replaced with the actual filename of your icon if it is named differently.
+- Note: Placing it anywhere else, like outside the BEGIN block or after the END of any block, will cause syntax errors or the resource not to be recognized.
+  
 ### 9. Compile & View the Results (with Icon)
 - Once you’ve added the icon reference, compile the project again.
 - After the build completes, check the output binary. The binary should now have the custom icon associated with it.
