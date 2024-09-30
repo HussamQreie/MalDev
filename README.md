@@ -10,18 +10,57 @@ ensure these steps  Open up Visual Studio and create a new solution,
  It's also possible to give the binary an icon, which again is a step towards making the binary appear less suspicious,
   .ico File Placement,  Modify The Resource File by add icon, Compile & View the Results.
 ```
-## Binary MetaData Modification
+
+---
+
+# Binary MetaData Modification
+
+## First, Add an entry point (If you want to use .rc file without other code)
+
+1. **Right-click** your project in **Solution Explorer** and select **Add > New Item**.
+2. Choose **C++ File (.cpp)** and name it something like `main.cpp`.
+3. Add the following minimal `WinMain()` function to the new `.cpp` file:
+
+    ```cpp
+    #include <windows.h>
+
+    int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+    {
+        return 0;  // Minimal entry point, does nothing
+    }
+    ```
+
+This `WinMain` function doesn’t perform any operations. Its only purpose is to provide the required entry point for a **Windows GUI application** so the linker can complete the build.
+
+### 2. Set the Subsystem to Windows
+
+You also need to ensure the project is treated as a **Windows application** by setting the correct subsystem.
+
+#### Steps to Set Subsystem:
+1. Right-click on the project in **Solution Explorer**, and select **Properties**.
+2. Go to **Configuration Properties** > **Linker** > **System**.
+3. Set **Subsystem** to `Windows (/SUBSYSTEM:WINDOWS)`.
+
+
+## Summary
+
+- Add a minimal `WinMain()` function to your project to provide the necessary entry point.
+- Set the subsystem to `Windows (/SUBSYSTEM:WINDOWS)`.
+- Compile the project again, and you should no longer see the **LNK2001: unresolved external symbol `mainCRTStartup`** error.
+
+---
+## Then, do the lab without errors
 
 ### 1. Open Visual Studio and Create a New Solution
 - Launch Visual Studio.
 - Go to **File** > **New** > **Project**.
-- Select **Console App** or any basic C++ project template (for simplicity).
+- Select **Console App** or any basic C++ project template **Empty Project**(for simplicity).
 - Choose a location to save your project and click **Create**.
 
 ### 2. Add a New Item
 - In **Solution Explorer**, right-click the project name.
 - Select **Add** > **New Item**.
-- From the list, choose **Resource File (.rc)** and name it (e.g., `metadata.rc`).
+- From the list **Visual C++** click on **Resource**, choose **Resource File (.rc)** and name it (e.g., `metadata.rc`).
 - Click **Add**.
 
 ### 3. Exit Resource Viewer
