@@ -134,11 +134,51 @@ This metadata simulates a legitimate program like Google Chrome.
 ```c
 IDI_ICON1 ICON "youricon.ico"
 ```
-Make sure: 
+Code after insertion:
 
-- The line IDI_ICON1 ICON "youricon.ico" is added right after the BEGIN statement and before the BLOCK "StringFileInfo" block.
-- Ensure that "youricon.ico" is replaced with the actual filename of your icon if it is named differently.
-- Note: Placing it anywhere else, like outside the BEGIN block or after the END of any block, will cause syntax errors or the resource not to be recognized.
+```c
+#define IDI_ICON1 101  // Define the icon identifier
+
+// Version Information Block
+1 VERSIONINFO
+FILEVERSION 112, 0, 5615, 88
+PRODUCTVERSION 1, 0, 0, 0
+FILEFLAGSMASK 0x0L
+
+#ifdef _DEBUG
+FILEFLAGS 0x1L
+#else
+FILEFLAGS 0x0L
+#endif
+
+FILEOS 0x4L // VOS__WINDOWS32
+FILETYPE 0x1L // VFT_APP
+FILESUBTYPE 0x0L // VFT2_UNKNOWN
+
+BEGIN
+BLOCK "StringFileInfo"
+BEGIN
+BLOCK "040904B0"
+BEGIN
+VALUE "CompanyName", "Google LLC."
+VALUE "FileDescription", "Google Chrome"
+VALUE "InternalName", "Chrome"
+VALUE "LegalCopyright", "Copyright 2023 Google LLC."
+VALUE "OriginalFilename", "chrome.exe"
+VALUE "ProductName", "Google Chrome"
+VALUE "ProductVersion", "112.0.5615.86"
+END
+END
+
+BLOCK "VarFileInfo"
+BEGIN
+VALUE "Translation", 0x409, 1200
+END
+END
+
+// Icon Declaration
+IDI_ICON1 ICON "C:\Users\MalDev\Desktop\Google_Chrome_icon (1).ico" //Reference
+```
   
 ### 9. Compile & View the Results (with Icon)
 - Once you’ve added the icon reference, compile the project again.
