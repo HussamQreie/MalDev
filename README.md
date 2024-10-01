@@ -129,15 +129,65 @@ The steps will cover:
    - Under **Linker > Input > Additional Dependencies**, add `ntdll.lib`.
      * by Insert **ntdll.lib;** 
 
-### 5. Code Implementation: Offensive PoC for Thread Enumeration
+### 5. Code Implementation
 
-Here is the implementation for enumerating threads of a target process using `NtQuerySystemInformation`.
 
-#### 5.1. Include Required Libraries
+- Header file: contains Libraries and Structures
+![header](https://github.com/user-attachments/assets/7bb3d90f-737f-4ca5-825a-4eb7d7d32bc9)
+
+- Code:
 
 ```cpp
-#include <windows.h>
-#include <winternl.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+#ifndef SYSTEM_INFO_H // Check if SYSTEM_INFO_H is not defined
+#define SYSTEM_INFO_H // Define SYSTEM_INFO_H
+
+// SDK and C libraries to deal with WinOS
+#include <windows.h> // allow to interact with WinOS
+#include <winternl.h> // allow to interact in low-level
+#include <stdio.h> // allow C  I/O operations
+#include <stdlib.h> // allow mem and proc management using C 
+
+// Define your structures here
+typedef struct _CLIENT_ID { // Identifies each Process and Thread by PID 
+    HANDLE UniqueProcess;
+    HANDLE UniqueThread;
+} CLIENT_ID;
+
+typedef struct _SYSTEM_THREAD_INFORMATION {
+    LARGE_INTEGER KernelTime;
+    LARGE_INTEGER UserTime;
+    LARGE_INTEGER CreateTime;
+    ULONG WaitTime;
+    PVOID StartAddress;
+    CLIENT_ID ClientId;
+    KPRIORITY Priority;
+    LONG BasePriority;
+    ULONG ContextSwitches;
+    ULONG ThreadState;
+    ULONG WaitReason;
+} SYSTEM_THREAD_INFORMATION; // Thread Info structure you request
+
+typedef struct _SYSTEM_PROCESS_INFORMATION {
+    ULONG NextEntryOffset;
+    ULONG NumberOfThreads;
+    LARGE_INTEGER CreateTime;
+    LARGE_INTEGER UserTime;
+    LARGE_INTEGER KernelTime;
+    UNICODE_STRING ImageName;
+    KPRIORITY BasePriority;
+    HANDLE UniqueProcessId;
+    ULONG HandleCount;
+    SYSTEM_THREAD_INFORMATION Threads[1];
+} SYSTEM_PROCESS_INFORMATION; // Process Info structure you request
+
+// Function prototypes, header of function should be called in source code to get info you want to request which is located in the structure
+void ListRemoteProcessThreads(HANDLE processId);
+int main(int argc, char* argv[]); // main of header
+
+#endif // SYSTEM_INFO_H
 ```
+
+
+
+
