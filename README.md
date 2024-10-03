@@ -83,8 +83,9 @@ NtQuerySystemInformation is often used in system-level applications, performance
 ## Offensive Security Lab: Thread Enumeration using `NtQuerySystemInformation`
 
 ### Tools Required
-- **Visual Studio**
+- **Visual Studio + vsDebug Console**
 - **Windows SDK**
+
 
 The steps will cover:
 
@@ -132,8 +133,8 @@ The steps will cover:
 ### 5. Code Implementation
 
 
-- Header file: contains Libraries and Structures
-![header](https://github.com/user-attachments/assets/7bb3d90f-737f-4ca5-825a-4eb7d7d32bc9)
+- Header file codee: contains Libraries and Structures
+![Threadenum](https://github.com/user-attachments/assets/db784629-9f56-474f-a31b-2029eefd793c)
 
 - Code:
 
